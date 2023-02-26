@@ -33,14 +33,14 @@ function Sidebar() {
           <span><CurlLine/></span>
           </div>
           <div className='sidebar-part__content  mt-3'>
-          <div className='tags'>
+            <div className='tags'>
                 {
                     tagData && tagData.map(tag => (
                       <Link href={'/tags/' + tag.slug} className={tag.slug} key={tag.slug}>{tag.name}</Link>
                     ))
                 }
             </div>
-        </div>
+          </div>
       </div>
       <div className='category-posts sidebar-part'>
           <div className='sidebar-part__heading'>

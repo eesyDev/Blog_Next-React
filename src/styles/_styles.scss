@@ -8,6 +8,7 @@
 @import './components/CategoryDetail/_category_detail';
 @import './components/Breadcrumbs/_breadcrumbs';
 @import './components/PostCategoryItem/_post-category-item';
+@import './components/CategoryIndexItem/_category_index_item';
 
 $main: #4f70fe;
 $second:#ff0081;
@@ -163,6 +164,16 @@ img, svg {
         &.seo {
             &:hover, &:before {
                 color: #f9b439;
+            }
+        }
+        &.crypto {
+            &:hover, &:before {
+                color: #91ff4c;
+            }
+        }
+        &.dokhody {
+            &:hover, &:before {
+                color: #4cffae;
             }
         }
     }

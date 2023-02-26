@@ -83,6 +83,8 @@ function tagId() {
                             // console.log(tagData.tag_posts)
                             tagData.tag_posts && tagData.tag_posts.map((item) => (
                                 <PostItem key={item.id}
+                                links={'/categories/' + item.category[0]?.slug + '/' + item.slug}
+                                subLinks={'/subcategories/' + item.subcategory[0]?.slug + '/' + item.slug}
                                 class='col-sm-4'
                                 date={item.formatted_added_time}
                                 content_1={item.content_1}

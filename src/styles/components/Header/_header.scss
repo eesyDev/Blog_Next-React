@@ -1,0 +1,37 @@
+.header {
+    width: 100%;
+    .dropdown-menu {
+        padding: 20px;
+        white-space: nowrap;
+        a {
+            display: block;
+        }
+    }
+    &__top {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+    
+    &__buttons {
+        display: flex;
+        justify-content: flex-end;
+    }
+    .logo {
+        display: block;
+        width: 80px;
+        height: 80px;
+        margin: 0 auto;
+    }
+    &__middle {
+        text-align: center;
+    }
+    .motto {
+        color: #8f9bad;
+        line-height: 1.1;
+        font-size: 12px;
+    }
+    &__nav {
+        border-top: solid 1px #ebebeb;
+        padding: 20px 0;
+    }
+}

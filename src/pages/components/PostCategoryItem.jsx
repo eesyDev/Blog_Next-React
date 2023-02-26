@@ -21,7 +21,7 @@ function PostCategoryItem(props) {
         <div className='post-category-item__details'>
             <div className='meta'>{props.date}</div>
             <h5 className='post-category-item__title'>{props.subLinks ? <Link href={props.subLinks}>{props.title}</Link> : <Link href={props.links}>{props.title}</Link>}</h5>
-            <p className='post-category-item__announce'>{announcement}</p>
+            <p className='post-category-item__announce' dangerouslySetInnerHTML={{ __html: announcement}}/>
             <div className='post-category-item__bottom'>
                 <div className='tags'>
                     {

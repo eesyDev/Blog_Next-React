@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Head from "next/head";
-import PostItem from '../components/PostItem';
 import Breadcrumbs from '../components/BreadCrumbs';
 import Sidebar from '../components/Sidebar';
 import PostCategoryItem from '../components/PostCategoryItem';
@@ -50,8 +49,9 @@ function subcategoryId() {
             <div className='category-detail__content mt-5 mb-5'>
                 <div className='container'>
                     <div className='category-detail__heading'>
-                        <h1 className='category-detail__title '>{categoryData.name}</h1>
                         <Breadcrumbs crumbs={crumbs}/>
+                        <h1 className='category-detail__title '>{categoryData.name}</h1>
+                        
                     </div>
                 </div>
             </div>
@@ -66,7 +66,7 @@ function subcategoryId() {
                             <div className='col-md-12 col-sm-6 category-detail__post' key={item.id}>
                               <PostCategoryItem 
                                   class='col-sm-6'
-                                  links={'/categories/' + item.category[0].slug + '/' + item.slug}
+                                  // links={'/categories/' + item.category[0].slug + '/' + item.slug}
                                   subLinks={'/subcategories/' + item.subcategory[0].slug + '/' + item.slug}
                                   date={item.formatted_added_time}
                                   content_1={item.content_1}

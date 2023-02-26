@@ -3,7 +3,6 @@ import axios from 'axios';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faFacebookF, faTwitter, faTelegram} from '@fortawesome/free-brands-svg-icons';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
 import SearchPopup from "./SearchPopup";
 import BurgerMenu from "./BurgerMenu";
 import Nav from 'react-bootstrap/Nav';
@@ -66,9 +65,9 @@ function Header() {
                         <a href="" className="logo" key="logo">
                             <img src="/images/logopic.png" alt="dollars"/>
                         </a>
-                        <a href="" className="logo-text" key="logo-text">
+                        <Link href="/" className="logo-text" key="logo-text">
                             <img src="/images/logo.svg"/>
-                        </a>
+                        </Link>
                         <p className="motto d-block" key='motto'>C дипломом можно заработать на жизнь. Самообразование сделает Вам состояние. Джим Рон ©</p>
                     </div>
                     <div className="col-md-4 col-sm-12 col-xs-12">

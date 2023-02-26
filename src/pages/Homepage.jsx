@@ -28,7 +28,7 @@ function Homepage() {
                       <PostItem key={item.id}
                         class='col-sm-6'
                         links={'/categories/' + item.category[0].slug + '/' + item.slug}
-                        subLinks={'/subcategories/' + item.subcategory[0].slug + '/' + item.slug}
+                        subLinks={"/subcategories/" + (item.subcategory[0]?.slug || '') + "/" + item.slug}
                         date={item.formatted_added_time}
                         content_1={item.content_1}
                         image_1={item.image_1}
@@ -39,7 +39,6 @@ function Homepage() {
                         slug={item.slug}
                         category={item.category[0].title}
                         categorySlug={item.category[0].slug}
-
                         title={item.title}
                         tags={item.tags}
                       />

@@ -1,0 +1,22 @@
+.category-detail {
+    .category-badge {
+        display: none;
+    }
+    &__posts-wrapper {
+        padding: 30px;
+        border: solid 1px #ebebeb;
+        border-radius: 10px;
+    }
+    &__post {
+        &:after {
+            content: "";
+            display: block;
+            height: 1px;
+            margin-bottom: 30px;
+            margin-top: 30px;
+            width: 100%;
+            background: #ebebeb;
+            background: linear-gradient(to left,#ebebeb 0%,transparent 100%);
+        }
+    }
+}

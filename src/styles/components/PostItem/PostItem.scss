@@ -1,0 +1,44 @@
+.post-item {
+    height: auto;
+    &__inner {
+        border: solid 1px #ebebeb;
+        border-radius: 10px;
+        height: 100%;
+    }
+    &__thumb {
+        margin: -1px;
+        position: relative;
+        .image {
+            border-radius: 10px 10px 0 0;
+        }
+        img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+            border-radius: 10px 10px 0 0;
+        }
+        .category-badge {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            padding: 6px 20px;
+        }
+    }
+    &__details {
+        padding: 30px;
+        .meta {
+            font-size: 13px;
+            color: #8f9bad;
+        }
+    }
+    &__announce {
+        color: #8f9bad;
+    }
+
+    &__bottom {
+        border-top: solid 1px #ebebeb;
+        margin: 0 30px;
+        padding: 20px 0;
+        
+    }
+}

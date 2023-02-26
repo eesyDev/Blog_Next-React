@@ -50,6 +50,7 @@ console.log(postData);
               <div className='col-lg-8'>
                 <div className='post-detail__wrapper'>
                   <div className='post-detail__heading'>
+                    <Breadcrumbs crumbs={crumbs}/>
                     <h1 className='title'>{postData.title}</h1>
                     <div className='meta'>{postData.formatted_added_time}</div>
                   </div>
@@ -57,23 +58,25 @@ console.log(postData);
                     <div className='post-detail__main-image'>
                       <img src={postData.image_1} alt={postData.title}/>
                     </div>
-                    <p>{postData.content_1}</p>
+                    <p dangerouslySetInnerHTML={{ __html: postData.content_1 }}/>
                     {
                       postData.image_2 && <img src={postData.image_2} alt={postData}/> 
                     }
                     {
-                      postData.content_2 && <p>{postData.content_2}</p>
+                      postData.content_2 && <p dangerouslySetInnerHTML={{ __html: postData.content_2 }}/>
                     }
                     {
                       postData.image_3 && <img src={postData.image_3} alt={postData}/> 
                     }
                     {
-                      postData.content_3 && <p>{postData.content_3}</p>
+                      postData.content_3 && <p dangerouslySetInnerHTML={{ __html: postData.content_3 }}/>
                     }
                   </article>
                 </div>
               </div>
-              <div className='col-lg-4'></div>
+              <div className='col-lg-4'>
+                <Sidebar/>
+              </div>
             </div>
           </div>
           <Footer/>

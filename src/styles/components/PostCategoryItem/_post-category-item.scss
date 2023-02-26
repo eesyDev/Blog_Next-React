@@ -1,0 +1,33 @@
+.post-category-item {
+    display: flex;
+    justify-content: space-between;
+    &__thumb {
+        max-width: 265px;
+        img {
+            object-fit: cover;
+            width: 100%;
+            transform: scale(1);
+            transition: all .3s ease-in-out;
+            height: 200px;
+        }
+        &:hover {
+            img {
+                transform: scale(1.07);
+            }
+        }
+    }
+    .inner {
+        overflow: hidden;
+        border-radius: 10px;
+        
+    }
+    &__details {
+        width: calc(100% - 295px);
+    }
+    &__title {
+        margin: 10px 0;
+    }
+    &__bottom {
+        margin-top: 10px;
+    }
+}
