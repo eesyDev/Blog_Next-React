@@ -1,27 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchPostData } from '@/redux/actions/postsActions';
 import Header from "@/pages/components/Header"
 import Footer from "@/pages/components/Footer"
 import Breadcrumbs from '@/pages/components/Breadcrumbs';
 import Sidebar from '@/pages/components/Sidebar';
 
 function PostDetail() {
-  const router = useRouter()
-  const { postSlug } = router.query
+  const router = useRouter();
+  const { postSlug } = router.query;
+  const dispatch = useDispatch();
+  const { postData, loading, error } = useSelector((state) => state.post);
 
-  const [postData, setPostData] = useState(null);
-    useEffect(() => {
-        async function fetchData() {
-        const response = await fetch(`http://127.0.0.1:8000/api/v1/posts/${postSlug}`);
-        const data = await response.json();
-        setPostData(data);
-        }
-        fetchData();
-    }, [postSlug]);
 
+
+  useEffect(() => {
+    dispatch(fetchPostData(postSlug));
+  }, [dispatch, postSlug]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   if (!postData) {
-    return <div>Loading...</div>;
+    return <div>No post found</div>;
   }
 
   const crumbs = [

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchSubCategoryData } from '@/redux/actions/subcategoryActions';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Head from "next/head";
@@ -10,28 +12,33 @@ import PostCategoryItem from '../components/PostCategoryItem';
 
 
 function subcategoryId() {
-    const router = useRouter()
-    const { slug } = router.query
+  const router = useRouter();
+  const { subcategorySlug } = router.query;
+  const dispatch = useDispatch();
+  const { subcategoryData, loading, error } = useSelector((state) => state.subcategory);
 
-    const [categoryData, setCategoryData] = useState(null);
-    useEffect(() => {
-        async function fetchData() {
-        const response = await fetch(`http://127.0.0.1:8000/api/v1/subcategory/${slug}`);
-        const data = await response.json();
-        setCategoryData(data);
-        }
-        fetchData();
-    }, [slug]);
+  useEffect(() => {
+    dispatch(fetchSubCategoryData(subcategorySlug));
+  }, [dispatch, subcategorySlug]);
 
-  if (!categoryData) {
+  if (loading) {
     return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  if (!subcategoryData) {
+    return <div>No category found</div>;
   }
 
   const crumbs = [
     { name: 'главная', path: '/' },
     { name: 'категории', path: '/subcategories' },
-    { name: categoryData.name, path: null },
+    { name: subcategoryData.name, path: null },
   ];
+
   return (
     <>
       <Head>
@@ -50,7 +57,7 @@ function subcategoryId() {
                 <div className='container'>
                     <div className='category-detail__heading'>
                         <Breadcrumbs crumbs={crumbs}/>
-                        <h1 className='category-detail__title '>{categoryData.name}</h1>
+                        <h1 className='category-detail__title '>{subcategoryData.name}</h1>
                         
                     </div>
                 </div>
@@ -62,7 +69,7 @@ function subcategoryId() {
                         <div className='category-detail__posts-wrapper'>
                           <div className='row'>
                           {
-                            categoryData.sub_posts && categoryData.sub_posts.map((item) => (
+                            subcategoryData.sub_posts && subcategoryData.sub_posts.map((item) => (
                             <div className='col-md-12 col-sm-6 category-detail__post' key={item.id}>
                               <PostCategoryItem 
                                   class='col-sm-6'

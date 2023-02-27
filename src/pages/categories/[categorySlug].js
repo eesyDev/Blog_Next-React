@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchCategoryData } from '@/redux/actions/categoryActions';
 import Head from "next/head";
-import PostItem from '../components/PostItem';
 import Breadcrumbs from '../components/BreadCrumbs';
 import Sidebar from '../components/Sidebar';
 import PostCategoryItem from '../components/PostCategoryItem';
@@ -11,21 +12,25 @@ import PostCategoryItem from '../components/PostCategoryItem';
 
 
 function categoryId() {
-    const router = useRouter()
-    const { categorySlug } = router.query
+  const router = useRouter();
+  const { categorySlug } = router.query;
+  const dispatch = useDispatch();
+  const { categoryData, loading, error } = useSelector((state) => state.category);
 
-    const [categoryData, setCategoryData] = useState(null);
-    useEffect(() => {
-        async function fetchData() {
-        const response = await fetch(`http://127.0.0.1:8000/api/v1/category/${categorySlug}`);
-        const data = await response.json();
-        setCategoryData(data);
-        }
-        fetchData();
-    }, [categorySlug]);
+  useEffect(() => {
+    dispatch(fetchCategoryData(categorySlug));
+  }, [dispatch, categorySlug]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   if (!categoryData) {
-    return <div>Loading...</div>;
+    return <div>No category found</div>;
   }
 
   const crumbs = [

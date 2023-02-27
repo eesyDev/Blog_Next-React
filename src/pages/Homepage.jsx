@@ -12,9 +12,7 @@ function Homepage() {
           try {
             const response = await axios.get('http://127.0.0.1:8000/api/v1/posts/');
             setData(response.data);
-            console.log(response.data)
           } catch (error) {
-            console.error(error);
           }
         }
         fetchData();
@@ -28,7 +26,7 @@ function Homepage() {
                       <PostItem key={item.id}
                         class='col-sm-6'
                         links={'/categories/' + item.category[0].slug + '/' + item.slug}
-                        subLinks={"/subcategories/" + (item.subcategory[0]?.slug || '') + "/" + item.slug}
+                        subLinks={`/subcategories/${item.subcategory[0]?.slug ? item.subcategory[0].slug + '/' : ''}${item.slug}`}
                         date={item.formatted_added_time}
                         content_1={item.content_1}
                         image_1={item.image_1}
