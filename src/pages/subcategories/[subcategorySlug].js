@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchSubCategoryData } from '@/redux/actions/subcategoryActions';
+import { fetchSubcategoryData } from '@/redux/slices/subcategorySlice';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Head from "next/head";
@@ -18,7 +18,9 @@ function subcategoryId() {
   const { subcategoryData, loading, error } = useSelector((state) => state.subcategory);
 
   useEffect(() => {
-    dispatch(fetchSubCategoryData(subcategorySlug));
+    if (subcategorySlug) {
+      dispatch(fetchSubcategoryData(subcategorySlug));
+    }
   }, [dispatch, subcategorySlug]);
 
   if (loading) {

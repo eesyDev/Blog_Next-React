@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchPostData } from '@/redux/actions/postsActions';
+import { fetchPostData } from '@/redux/slices/postSlice';
 import Header from "@/pages/components/Header"
 import Footer from "@/pages/components/Footer"
 import Breadcrumbs from '@/pages/components/Breadcrumbs';

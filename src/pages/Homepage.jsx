@@ -1,29 +1,25 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
 import PostItem from './components/PostItem';
 import Sidebar from './components/Sidebar';
+import { fetchAllPostsData } from '@/redux/slices/allPostsSlice';
 
 
 function Homepage() {
-    const [data, setData] = useState([]);
-
+    const dispatch = useDispatch();
+    const { allPostsData, loading, error } = useSelector((state) => state.allPosts);
+  
     useEffect(() => {
-        async function fetchData() {
-          try {
-            const response = await axios.get('http://127.0.0.1:8000/api/v1/posts/');
-            setData(response.data);
-          } catch (error) {
-          }
-        }
-        fetchData();
-    }, []);
-    console.log(data);
+      dispatch(fetchAllPostsData());
+    }, [dispatch]);
+
     return (
         <div className='container-xl'>
           <div className='mb-5 row'>
             <div className='posts row col-lg-8'>
               {
-                  data.map((item) => (
+                  allPostsData && allPostsData.map((item) => (
                       <PostItem key={item.id}
                         class='col-sm-6'
                         links={'/categories/' + item.category[0].slug + '/' + item.slug}
@@ -37,6 +33,7 @@ function Homepage() {
                         image_3={item.image_3}
                         slug={item.slug}
                         subcategory={item.subcategory[0]?.name}
+                        subcategorySlug={item.subcategory[0]?.slug}
                         category={item.category[0].title}
                         categorySlug={item.category[0].slug}
                         title={item.title}

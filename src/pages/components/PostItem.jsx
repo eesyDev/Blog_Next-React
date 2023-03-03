@@ -18,7 +18,7 @@ function PostItem(props) {
                 <div className='post-item__thumb'>
                     <div className='image'>
                     {   props.subcategory ? 
-                        <Link href={props.subLinks} className="category-badge btn-main btn">{props.subcategory}</Link> 
+                        <Link href={'/subcategories/' + props.subcategorySlug} className="category-badge btn-main btn">{props.subcategory}</Link> 
                         :
                         <Link href={'/categories/' + props.categorySlug} className="category-badge btn-main btn">
                             {props.category}

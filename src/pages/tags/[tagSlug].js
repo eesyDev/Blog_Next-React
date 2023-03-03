@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchTagData } from '@/redux/actions/tagsActions';
+import { fetchTagData } from '@/redux/slices/tagSlice';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Head from "next/head";
@@ -12,21 +12,28 @@ import Breadcrumbs from '../components/Breadcrumbs';
 function tagSlug() {
   const router = useRouter();
   const { tagSlug } = router.query;
+   
   const dispatch = useDispatch();
-  const { tagsData, loading, error } = useSelector((state) => state.tag);
+  const { tagData, loading, error } = useSelector((state) => state.tag);
+
+  
 
   useEffect(() => {
     dispatch(fetchTagData(tagSlug));
   }, [dispatch, tagSlug]);
 
-  console.log(tagSlug)
+  if (!tagData) {
+    // Render a loading state or error message
+    return <div>Loading...</div>;
+  }
 
-  const count = tagsData ? tagsData.tag_posts ? tagsData.tag_posts.length : 0 : ''
+
+  const count = tagData ? tagData.tag_posts ? tagData.tag_posts.length : 0 : ''
 
   const crumbs = [
     { name: 'Главная', path: '/' },
     { name: 'Теги', path: '/tags' },
-    // { name: tagsData.name, path: null },
+    { name: tagData.name, path: null },
   ];
 
   function pluralize(count) {
@@ -64,21 +71,21 @@ function tagSlug() {
 					<div>Loading...</div>
 					  ) : error ? (
 						<div>Error: {error.message}</div>
-					  ) : !tagsData ? (
+					  ) : !tagData ? (
 						<div>No categories found</div>
 					  ) : (
 					  <div className='tag-detail__content '>
 							<div className='container-xl'>
 								<div className='tag-detail__heading'>
 									<div className='left'>
-										<h1 className={'tag-detail__title ' + tagsData.slug}>{tagsData.name}</h1>
+										<h1 className={'tag-detail__title ' + tagData.slug}>{tagData.name}</h1>
 										<span className='count'>{count} &nbsp; <span className='dot'></span>{articlesNaming}</span>
 										<div className='decoration-count'>{count}</div>
 									</div>
 									<div className='right'>
 										<Breadcrumbs
 										crumbs={crumbs}/>
-										<p>{tagsData.description}</p>
+										<p>{tagData.description}</p>
 
 									</div>
 								</div>
@@ -93,14 +100,14 @@ function tagSlug() {
                               <div>Loading...</div>
                                 ) : error ? (
                                   <div>Error: {error.message}</div>
-                                ) : !tagsData ? (
+                                ) : !tagData ? (
                                   <div>No categories found</div>
                                 ) : (
-                                tagsData.tag_posts && tagsData.tag_posts.map((item) => (
+                                  tagData.tag_posts && tagData.tag_posts.map((item) => (
                                   <PostItem key={item.id}
-                                  links={'/categories/' + item.category[0]?.slug + '/' + item.slug}
-                                  subLinks={'/subcategories/' + item.subcategory[0]?.slug + '/' + item.slug}
-                                  class='col-md-4 col-sm-6'
+                                  class='col-sm-6 col-md-4'
+                                  links={'/categories/' + item.category[0].slug + '/' + item.slug}
+                                  subLinks={`/subcategories/${item.subcategory[0]?.slug ? item.subcategory[0].slug + '/' : ''}${item.slug}`}
                                   date={item.formatted_added_time}
                                   content_1={item.content_1}
                                   image_1={item.image_1}
@@ -109,8 +116,9 @@ function tagSlug() {
                                   content_3={item.content_3}
                                   image_3={item.image_3}
                                   slug={item.slug}
+                                  subcategory={item.subcategory[0]?.name}
                                   category={item.category[0].title}
-                                  category_id={item.category[0].id}
+                                  categorySlug={item.category[0].slug}
                                   title={item.title}
                                   tags={item.tags}
                                 />

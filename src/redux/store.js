@@ -1,16 +1,20 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import categoryReducer from './slices/categorySlice';
+import tagReducer from './slices/tagSlice';
+import allCategoriesReducer from './slices/allCategoriesSlice';
 import thunk from 'redux-thunk';
-import postReducer from './reducers/postsReducer';
-import subcategoryReducer from './reducers/subcategoryReducer';
-import categoryReducer from './reducers/categoryReducer';
-import tagsReducer from './reducers/tagsReducer';
-import allTagsReducer from './reducers/allTagsReducer';
-import allSubcategoriesReducer from './reducers/allSubcategoriesReducer';
-import allCategoriesReducer from './reducers/allCategoriesReducer';
+import postReducer from './slices/postSlice';
+import allTagsReducer from './slices/allTagsSlice';
+import subcategoryReducer from './slices/subcategorySlice';
+import allSubcategoriesReducer from './slices/allSubcategoriesSlice';
+import sidebarCategoryReducer from './slices/sidebarCategorySlice';
+import allPostsReducer from './slices/allPostsSlice';
 
 const initialState = {
   post: null,
 };
+
+
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -27,13 +31,16 @@ const reducer = (state = initialState, action) => {
 export const store = configureStore({
   reducer: {
     post: postReducer,
+    allPosts: allPostsReducer,
     subcategory: subcategoryReducer,
     category: categoryReducer,
-    tag: tagsReducer,
+    tag: tagReducer,
     allTags: allTagsReducer,
     allSubcategories: allSubcategoriesReducer,
-    allCategories: allCategoriesReducer
+    allCategories: allCategoriesReducer,
+    sidebarCategory: sidebarCategoryReducer, 
   },
+  middleware: [thunk, ...getDefaultMiddleware()],
 })
 
 export default store;

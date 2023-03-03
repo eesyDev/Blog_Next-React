@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllCategoriesData } from '@/redux/actions/categoryActions';
+import { fetchAllCategoriesData } from '@/redux/slices/allCategoriesSlice';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Link from 'next/link';
@@ -44,7 +43,7 @@ function indexSubcategories() {
 				  ) : error ? (
 					<div>Error: {error.message}</div>
 				  ) : !allCategoriesData ? (
-					<div>No categories found</div>
+					<div>No categories</div>
 				  ) : (
 					allCategoriesData.map(category => {
 						const count = category.category_posts ? category.category_posts.length : 0

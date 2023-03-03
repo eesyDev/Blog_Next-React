@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchPostData } from '@/redux/actions/postsActions';
+import { fetchPostData } from '@/redux/slices/postSlice';
 import Head from 'next/head';
 import Header from '@/pages/components/Header';
 import Footer from '@/pages/components/Footer';

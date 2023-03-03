@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchCategoryData } from '@/redux/actions/categoryActions';
+import { fetchCategoryData } from '@/redux/slices/categorySlice';
 import Head from "next/head";
 import Breadcrumbs from '../components/BreadCrumbs';
 import Sidebar from '../components/Sidebar';

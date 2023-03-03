@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from "react";
 import axios from 'axios';
 import Link from 'next/link';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchAllCategoriesData } from '@/redux/slices/allCategoriesSlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faFacebookF, faTwitter, faTelegram} from '@fortawesome/free-brands-svg-icons';
 import SearchPopup from "./SearchPopup";
@@ -11,20 +13,14 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 
 
 
-function Header() {
-    const [data, setData] = useState([]);
+function Header() { 
+  const dispatch = useDispatch();
+  const { allCategoriesData, loading, error } = useSelector((state) => state.allCategories);
 
     useEffect(() => {
-        async function fetchData() {
-          try {
-            const response = await axios.get('http://127.0.0.1:8000/api/v1/category/');
-            setData(response.data);
-          } catch (error) {
-            console.error(error);
-          }
-        }
-        fetchData();
-    }, []);
+        dispatch(fetchAllCategoriesData());
+      }, [dispatch]);
+
     return (
         <header className="header">
             <div className="container-xl header__top">
@@ -82,7 +78,7 @@ function Header() {
                             <Nav>
                                 <Link href="/" key="main" className="nav-link">Главная</Link>
                                 {
-                                    data.map((item, index) => {
+                                    allCategoriesData && allCategoriesData.map((item, index) => {
                                     
                                         return (    
                                             item.subcategories.length > 0 ?               

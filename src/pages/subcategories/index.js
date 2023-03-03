@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Head from 'next/head';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllSubCategoriesData } from '@/redux/actions/subcategoryActions';
+import { fetchAllSubcategoriesData } from '@/redux/slices/allSubcategoriesSlice';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Link from 'next/link';
@@ -12,7 +12,7 @@ function indexSubcategories() {
   const { allSubcategoriesData, loading, error } = useSelector((state) => state.allSubcategories);
 
   useEffect(() => {
-    dispatch(fetchAllSubCategoriesData());
+    dispatch(fetchAllSubcategoriesData());
   }, [dispatch]);
 
 

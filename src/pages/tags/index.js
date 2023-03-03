@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Head from 'next/head';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchAllTagsData } from '@/redux/actions/tagsActions';
+import { fetchAllTagsData } from '@/redux/slices/allTagsSlice';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Link from 'next/link';

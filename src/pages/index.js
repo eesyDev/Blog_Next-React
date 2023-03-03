@@ -3,7 +3,6 @@ import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import { useRouter } from "next/router";
 import Homepage from "./Homepage";
 
 
@@ -14,7 +13,6 @@ export default function Home() {
   setIsBrowser(typeof window !== "undefined");
   }, []);
 
-  const router = useRouter();
 
   return isBrowser ? (
     <>
