@@ -7,6 +7,9 @@
             display: block;
         }
     }
+    .navbar-collapse {
+        display: none;
+    }
     &__top {
         padding-top: 30px;
         padding-bottom: 30px;
@@ -14,7 +17,8 @@
     
     &__buttons {
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
+        margin-top: 20px;
     }
     .logo {
         display: block;
@@ -33,5 +37,21 @@
     &__nav {
         border-top: solid 1px #ebebeb;
         padding: 20px 0;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .header {
+        &__buttons {
+            justify-content: flex-end;
+        }
+    }
+}
+
+@media screen and (min-width:992px) {
+    .header {
+        .navbar-collapse {
+            display: flex;
+        }
     }
 }

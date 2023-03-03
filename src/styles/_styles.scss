@@ -9,6 +9,7 @@
 @import './components/Breadcrumbs/_breadcrumbs';
 @import './components/PostCategoryItem/_post-category-item';
 @import './components/CategoryIndexItem/_category_index_item';
+@import './components/PostDetail/_post_detail';
 
 $main: #4f70fe;
 $second:#ff0081;
@@ -22,6 +23,11 @@ body {
 ul {
     padding: 0;
     margin: 0;
+}
+article {
+    ul {
+        padding-left: 20px;
+    }
 }
 a {
     color: inherit;

@@ -63,7 +63,7 @@ function subcategoryId() {
                 </div>
             </div>
             <div className='category-detail__posts mb-5'>
-                <div className='container'>
+                <div className='container-xl'>
                     <div className='row'>
                       <div className='col-lg-8'>
                         <div className='category-detail__posts-wrapper'>

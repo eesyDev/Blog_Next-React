@@ -67,8 +67,8 @@ function tagSlug() {
 					  ) : !tagsData ? (
 						<div>No categories found</div>
 					  ) : (
-					  <div className='tag-detail__content mt-5 mb-5'>
-							<div className='container'>
+					  <div className='tag-detail__content '>
+							<div className='container-xl'>
 								<div className='tag-detail__heading'>
 									<div className='left'>
 										<h1 className={'tag-detail__title ' + tagsData.slug}>{tagsData.name}</h1>
@@ -86,7 +86,7 @@ function tagSlug() {
 						</div>)
 			}
             <div className='tag-detail__posts mb-5'>
-                <div className='container'>
+                <div className='container-xl'>
                     <div className='row'>
                         {
                             loading ? (
@@ -96,25 +96,25 @@ function tagSlug() {
                                 ) : !tagsData ? (
                                   <div>No categories found</div>
                                 ) : (
-								tagsData.tag_posts && tagsData.tag_posts.map((item) => (
-									<PostItem key={item.id}
-									links={'/categories/' + item.category[0]?.slug + '/' + item.slug}
-									subLinks={'/subcategories/' + item.subcategory[0]?.slug + '/' + item.slug}
-									class='col-sm-4'
-									date={item.formatted_added_time}
-									content_1={item.content_1}
-									image_1={item.image_1}
-									content_2={item.content_2}
-									image_2={item.image_2}
-									content_3={item.content_3}
-									image_3={item.image_3}
-									slug={item.slug}
-									category={item.category[0].title}
-									category_id={item.category[0].id}
-									title={item.title}
-									tags={item.tags}
-								/>
-								))
+                                tagsData.tag_posts && tagsData.tag_posts.map((item) => (
+                                  <PostItem key={item.id}
+                                  links={'/categories/' + item.category[0]?.slug + '/' + item.slug}
+                                  subLinks={'/subcategories/' + item.subcategory[0]?.slug + '/' + item.slug}
+                                  class='col-md-4 col-sm-6'
+                                  date={item.formatted_added_time}
+                                  content_1={item.content_1}
+                                  image_1={item.image_1}
+                                  content_2={item.content_2}
+                                  image_2={item.image_2}
+                                  content_3={item.content_3}
+                                  image_3={item.image_3}
+                                  slug={item.slug}
+                                  category={item.category[0].title}
+                                  category_id={item.category[0].id}
+                                  title={item.title}
+                                  tags={item.tags}
+                                />
+                                ))
                           	)
                         }
                     </div>

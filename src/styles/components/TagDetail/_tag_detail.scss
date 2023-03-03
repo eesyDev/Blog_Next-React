@@ -11,16 +11,18 @@
         align-items: center;
         text-align: center;
         padding: 50px;
-        margin: 50px auto;
+        margin: 0 auto 50px;
         border: 1px solid #ededed;
         background-color: #f4f6ff;
+        flex-wrap: wrap;
         .left {
-            width: 40%;
+            width: 100%;
             position: relative;
         }
         .right {
-            width: 60%;
-            padding-left: 40px;
+            width: 100%;
+            padding-left: 0px;
+            margin-top: 30px;
         }
     }
     &__title {
@@ -59,10 +61,27 @@
         -webkit-transform: translate(-50%,-50%);
         -ms-transform: translate(-50%,-50%);
         transform: translate(-50%,-50%);
-        z-index: -1;
+        z-index: 0;
         font-size: 200px;
         line-height: 1;
         font-weight: 700;
         opacity: .05;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .tag-detail {
+        &-content {
+            margin: 70px 0;
+        }
+        &__heading {
+            .left {
+                width: 40%;
+            }
+            .right {
+                width: 60%;
+                padding-left: 40px;
+            }
+        }
     }
 }

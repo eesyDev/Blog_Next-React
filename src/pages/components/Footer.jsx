@@ -55,7 +55,7 @@ function Footer() {
                             </li>
                         </ul>
                     </div>
-                    <div className='col-md-4 footer__right text-end'>
+                    <div className='col-md-4 footer__right'>
                         <a href="#" id="back_to_top" onClick={handleBackToTop}>
                             <i>
                                 <FontAwesomeIcon icon={faAngleUp} />

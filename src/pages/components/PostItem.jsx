@@ -10,19 +10,25 @@ function PostItem(props) {
     const announcementText = first10Words ? first10Words.join(" ") : '';
     const announcement = announcementText + "...";
 
+    console.log(props.category)
+
     return (
         <div className={'post-item mb-5 ' + props.class}>    
             <div className='post-item__inner'>
                 <div className='post-item__thumb'>
                     <div className='image'>
+                    {   props.subcategory ? 
+                        <Link href={props.subLinks} className="category-badge btn-main btn">{props.subcategory}</Link> 
+                        :
                         <Link href={'/categories/' + props.categorySlug} className="category-badge btn-main btn">
                             {props.category}
                         </Link>
+                    }
                         <div>
-                            {props.subLinks ? 
+                            {props.subcategory ? 
                             <Link href={props.subLinks}><img src={props.image_1} alt={props.name}/></Link> : <Link href={props.links}><img src={props.image_1} alt={props.name}/></Link>
                             }                      
-                            </div>
+                        </div>
                             
                     </div>
                 </div>

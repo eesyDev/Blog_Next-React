@@ -1,8 +1,9 @@
 .post-category-item {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
     &__thumb {
-        max-width: 265px;
+        max-width: 100%;
+        width: 100%;
         img {
             object-fit: cover;
             width: 100%;
@@ -22,12 +23,26 @@
         
     }
     &__details {
-        width: calc(100% - 295px);
+        width: 100%;
+        margin-top: 20px;
     }
     &__title {
         margin: 10px 0;
     }
     &__bottom {
         margin-top: 10px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .post-category-item {
+        display: flex;
+        justify-content: space-between;
+        &__thumb {
+            max-width: 265px;
+        }
+        &__details {
+            width: calc(100% - 295px);
+        }
     }
 }

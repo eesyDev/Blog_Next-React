@@ -30,16 +30,24 @@ function PostDetail() {
   if (!postData) {
     return <div>No post found</div>;
   }
+  const truncateString = (str, maxLength) => {
+    if (str.length > maxLength) {
+      return str.slice(0, maxLength) + '...';
+    } else {
+      return str;
+    }
+  }
 
+  const truncatedTitle = postData.title ? truncateString(postData.title, 20) : ''
   const crumbs = [
     { name: 'главная', path: '/' },
     { name: 'категории', path: '/categories' },
-    { name: postData.title, path: null },
+    { name: truncatedTitle, path: null },
   ];
     return (
       <div className='post-detail'>
         <Header/>
-        <div className='container'>
+        <div className='container-lg'>
             <div className='row'>
               <div className='col-lg-8'>
                 <div className='post-detail__wrapper'>

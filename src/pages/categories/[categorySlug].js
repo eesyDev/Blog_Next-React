@@ -54,7 +54,7 @@ function categoryId() {
         <div className='category-detail'>
             <Header/>
             <div className='category-detail__content mt-5 mb-5'>
-                <div className='container'>
+                <div className='container-xl'>
                     <div className='category-detail__heading'>
                         <h1 className='category-detail__title '>{categoryData.title}</h1>
                         <Breadcrumbs crumbs={crumbs}/>
@@ -62,14 +62,14 @@ function categoryId() {
                 </div>
             </div>
             <div className='category-detail__posts mb-5'>
-                <div className='container'>
+                <div className='container-xl'>
                     <div className='row'>
                       <div className='col-lg-8'>
                         <div className='category-detail__posts-wrapper'>
                           <div className='row'>
                           {
                             categoryData.category_posts && categoryData.category_posts.map((item) => (
-                            <div className='col-md-12 col-sm-6 category-detail__post' key={item.id}>
+                            <div className='category-detail__post' key={item.id}>
                               <PostCategoryItem 
                                   class='col-sm-6'
                                   links={'/categories/' + item.category[0].slug + '/' + item.slug}

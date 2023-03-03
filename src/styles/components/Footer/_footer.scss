@@ -2,5 +2,16 @@
     &__inner {
         padding: 40px 0;
         border-top: solid 1px #ebebeb;
+        > div {
+            text-align: center;
+        }
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .footer {
+        &__right {
+            text-align: right;
+        }
     }
 }

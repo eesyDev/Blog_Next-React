@@ -17,9 +17,10 @@ function Homepage() {
         }
         fetchData();
     }, []);
+    console.log(data);
     return (
-        <div className='container'>
-          <div className='row mb-5'>
+        <div className='container-xl'>
+          <div className='mb-5 row'>
             <div className='posts row col-lg-8'>
               {
                   data.map((item) => (
@@ -35,6 +36,7 @@ function Homepage() {
                         content_3={item.content_3}
                         image_3={item.image_3}
                         slug={item.slug}
+                        subcategory={item.subcategory[0]?.name}
                         category={item.category[0].title}
                         categorySlug={item.category[0].slug}
                         title={item.title}

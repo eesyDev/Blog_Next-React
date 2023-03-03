@@ -33,7 +33,7 @@ function indexSubcategories() {
     <div className='category-index'>
     <Head/>
     <Header/>
-    <div className='container'>
+    <div className='container-xl'>
       <div className='category-index__wrapper row'>
         <div className='col-md-8 row'>
           {
