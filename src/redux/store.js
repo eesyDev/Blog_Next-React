@@ -9,24 +9,39 @@ import subcategoryReducer from './slices/subcategorySlice';
 import allSubcategoriesReducer from './slices/allSubcategoriesSlice';
 import sidebarCategoryReducer from './slices/sidebarCategorySlice';
 import allPostsReducer from './slices/allPostsSlice';
+import nasdaqReducer from './slices/nasdaqSlice';
+import themeReducer from './slices/themeSlice';
+import searchReducer from './slices/searchSlice';
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist'
+import storage from 'redux-persist/lib/storage';
+import { createSerializableStateInvariantMiddleware } from '@reduxjs/toolkit';
 
-const initialState = {
-  post: null,
+const searchPersistConfig = {
+  key: 'search',
+  storage,
+  blacklist: ['register'], // Add blacklist to ignore non-serializable function
 };
 
+const persistedReducer = persistReducer(searchPersistConfig, searchReducer);
 
-
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case 'SET_POST_DATA':
-      return {
-        ...state,
-        postsData: action.payload,
-      };
-    default:
-      return state;
+const serializableMiddleware = createSerializableStateInvariantMiddleware({
+  isSerializable: (value) => typeof value !== 'function',
+  ignoredActions: ['persist/PERSIST'],
+  ignoredActionPaths: ['register'],
+  ignoredPaths: ['register'],
+  onError: (error) => {
+    console.log('Non-serializable value:', error.payload);
   }
-};
+});
 
 export const store = configureStore({
   reducer: {
@@ -39,8 +54,17 @@ export const store = configureStore({
     allSubcategories: allSubcategoriesReducer,
     allCategories: allCategoriesReducer,
     sidebarCategory: sidebarCategoryReducer, 
+    nasdaq: nasdaqReducer,
+    mode: themeReducer, 
+    search: persistedReducer,
   },
-  middleware: [thunk, ...getDefaultMiddleware()],
-})
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat(thunk),
+});
 
+export const persistor = persistStore(store);
 export default store;

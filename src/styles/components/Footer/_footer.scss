@@ -1,7 +1,7 @@
 .footer {
     &__inner {
         padding: 40px 0;
-        border-top: solid 1px #ebebeb;
+        border-top: solid 1px var(--border-color);
         > div {
             text-align: center;
         }

@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
-import PostItem from './components/PostItem';
-import Sidebar from './components/Sidebar';
+import PostItem from './PostItem';
+import Sidebar from './Sidebar';
 import { fetchAllPostsData } from '@/redux/slices/allPostsSlice';
 
 
@@ -22,7 +21,7 @@ function Homepage() {
                   allPostsData && allPostsData.map((item) => (
                       <PostItem key={item.id}
                         class='col-sm-6'
-                        links={'/categories/' + item.category[0].slug + '/' + item.slug}
+                        links={'/categories/' + item.category[0]?.slug + '/' + item.slug}
                         subLinks={`/subcategories/${item.subcategory[0]?.slug ? item.subcategory[0].slug + '/' : ''}${item.slug}`}
                         date={item.formatted_added_time}
                         content_1={item.content_1}
@@ -34,8 +33,8 @@ function Homepage() {
                         slug={item.slug}
                         subcategory={item.subcategory[0]?.name}
                         subcategorySlug={item.subcategory[0]?.slug}
-                        category={item.category[0].title}
-                        categorySlug={item.category[0].slug}
+                        category={item.category[0]?.title}
+                        categorySlug={item.category[0]?.slug}
                         title={item.title}
                         tags={item.tags}
                       />

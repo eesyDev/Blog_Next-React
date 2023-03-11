@@ -106,7 +106,7 @@ function tagSlug() {
                                   tagData.tag_posts && tagData.tag_posts.map((item) => (
                                   <PostItem key={item.id}
                                   class='col-sm-6 col-md-4'
-                                  links={'/categories/' + item.category[0].slug + '/' + item.slug}
+                                  links={'/categories/' + item.category[0]?.slug + '/' + item.slug}
                                   subLinks={`/subcategories/${item.subcategory[0]?.slug ? item.subcategory[0].slug + '/' : ''}${item.slug}`}
                                   date={item.formatted_added_time}
                                   content_1={item.content_1}
@@ -117,8 +117,8 @@ function tagSlug() {
                                   image_3={item.image_3}
                                   slug={item.slug}
                                   subcategory={item.subcategory[0]?.name}
-                                  category={item.category[0].title}
-                                  categorySlug={item.category[0].slug}
+                                  category={item.category[0]?.title}
+                                  categorySlug={item.category[0]?.slug}
                                   title={item.title}
                                   tags={item.tags}
                                 />

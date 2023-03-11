@@ -10,23 +10,75 @@
 @import './components/PostCategoryItem/_post-category-item';
 @import './components/CategoryIndexItem/_category_index_item';
 @import './components/PostDetail/_post_detail';
+@import './components/ModeToggle/_mode_toggle.css';
 
 $main: #4f70fe;
 $second:#ff0081;
+
 :root {
     --epcl-secondary-color: #ff4c60;
     --epcl-main-color: #4f54fe;
 }
 body {
-    font-family: 'Jost', sans-serif;
+    font-family: 'Cormorant Garamond', serif;
+    &.dark {
+        --border-color: #292932;
+        --accent-background-color: #0c1954;
+        
+        background: #010616;
+        color: #fff ;
+        .tags a {
+            background: #020513;
+            box-shadow: 0 2px 6px rgba(255, 255, 255, .26);
+        }
+        .navbar, .nav-link {
+            color: #fff;
+        }
+        .navbar-nav .show>.nav-link  {
+            color: #a1a1a1;
+        }
+    }
+    &.light {
+        --border-color: #ebebeb;
+        --accent-background-color: #f4f6ff;
+        background-color: #fff;
+        color: #000;
+    }
 }
 ul {
     padding: 0;
     margin: 0;
 }
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Jost', sans-serif;
+}
+tbody, td, tfoot, th, thead, tr {
+    border-color: #efefef;
+    border-style: solid;
+    border-width: 1px;
+    p {
+        margin: 0;
+    }
+    h3 {
+        font-size: 1.2rem;
+    }
+}
 article {
     ul {
         padding-left: 20px;
+    }
+    td, th {
+        padding: 15px;
+    }
+    h2, h3 {
+        margin: 30px 0;
+    }
+    p {
+        line-height: 1.7;
+        margin: 20px 0;
+    }
+    b, strong {
+        font-weight: 500;
     }
 }
 a {
@@ -79,6 +131,7 @@ img, svg {
 
 .btn {
     color: #fff;
+    font-family: 'Jost', sans-serif;
     border: 0;
     border-radius: 25px;
     font-size: 14px;
@@ -110,7 +163,7 @@ img, svg {
     }
 }
 .icon-button {
-    background: linear-gradient(to top,#87c2ff 0%,#4f70fe 51%,#87daff 100%);
+    background: linear-gradient(to top, #9d87ff 0%, #4f70fe 51%, #bc87ff 100%);
     color: #fff;
     border: 0;
     border-radius: 50%;
@@ -135,6 +188,7 @@ img, svg {
 .tags {
     display: flex;
     flex-wrap: wrap;
+    font-family: 'Jost', sans-serif;
     a {
         display: inline-block;
         -webkit-box-shadow: 0px 2px 6px rgba(7, 10, 25, .1);

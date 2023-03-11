@@ -1,5 +1,6 @@
 .header {
     width: 100%;
+    font-family: 'Jost', sans-serif;
     .dropdown-menu {
         padding: 20px;
         white-space: nowrap;
@@ -35,7 +36,7 @@
         font-size: 12px;
     }
     &__nav {
-        border-top: solid 1px #ebebeb;
+        border-top: solid 1px var(--border-color);
         padding: 20px 0;
     }
 }

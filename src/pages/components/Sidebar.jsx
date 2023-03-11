@@ -49,7 +49,7 @@ function Sidebar() {
               sidebarCategoryData && sidebarCategoryData.sub_posts && sidebarCategoryData.sub_posts.map((post) => (
                 <PostSideItem
                 key={post.id}
-                link={post.id}
+                link={'/subcategories/' + post.subcategory[0].slug + '/' + post.slug}
                 img_1={post.image_1}
                 date={post.formatted_added_time}
                 name={post.title}

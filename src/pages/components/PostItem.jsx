@@ -10,7 +10,6 @@ function PostItem(props) {
     const announcementText = first10Words ? first10Words.join(" ") : '';
     const announcement = announcementText + "...";
 
-    console.log(props.category)
 
     return (
         <div className={'post-item mb-5 ' + props.class}>    

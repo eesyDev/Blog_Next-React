@@ -1,12 +1,36 @@
-import React, { useState } from 'react';
-import { Modal, Button } from "react-bootstrap";
+import React, { useState, useEffect } from 'react';
+import { Modal } from "react-bootstrap";
+import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
+import { useDispatch, useSelector } from 'react-redux';
+import { updateQuery, updateFilteredPosts, fetchSearchData } from '@/redux/slices/searchSlice';
+
 
 
 function SearchPopup() {
   const [show, setShow] = useState(false);
   const [fullscreen, setFullscreen] = useState(true);
+  const [query, setQuery] = useState('');
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const filteredPosts = useSelector(state => state.search.filteredPosts);
+
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (query) {
+      dispatch(fetchSearchData(query));
+      dispatch(updateQuery(query));
+      router.push(`/search?q=${encodeURIComponent(query)}`);
+      setShow(false);
+    }
+  };
+  const handleInputChange = (event) => {
+    setQuery(event.target.value);
+  };
+
 
 
   const handleClose = () => setShow(false);
@@ -29,9 +53,14 @@ function SearchPopup() {
                 Search
             </h3>
         </div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="form-group d-flex search-form">
-            <input type="text" className="form-control me-2" id="searchInput" />
+            <input className="form-control me-2"
+              type="text"
+              placeholder="Search posts..."
+              value={query}
+              onChange={handleInputChange}
+            />
             <button className='btn btn-lg btn-main' type="submit">
                 <FontAwesomeIcon icon={faMagnifyingGlass}/>
             </button>
@@ -43,4 +72,4 @@ function SearchPopup() {
   )
 }
 
-export default SearchPopup
+export default SearchPopup;

@@ -85,8 +85,8 @@ function subcategoryId() {
                                   content_3={item.content_3}
                                   image_3={item.image_3}
                                   slug={item.slug}
-                                  category={item.category[0].title}
-                                  categorySlug={item.category[0].slug}        
+                                  category={item.category[0]?.title}
+                                  categorySlug={item.category[0]?.slug}        
                                   title={item.title}
                                   tags={item.tags}
                                 />

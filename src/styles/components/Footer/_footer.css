@@ -1,1 +1,1 @@
-.footer__inner{padding:40px 0;border-top:solid 1px #ebebeb}.footer__inner>div{text-align:center}@media screen and (min-width: 992px){.footer__right{text-align:right}}
+.footer__inner{padding:40px 0;border-top:solid 1px var(--border-color)}.footer__inner>div{text-align:center}@media screen and (min-width: 992px){.footer__right{text-align:right}}

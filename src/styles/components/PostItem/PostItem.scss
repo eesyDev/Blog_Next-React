@@ -1,7 +1,7 @@
 .post-item {
     height: auto;
     &__inner {
-        border: solid 1px #ebebeb;
+        border: solid 1px var(--border-color);
         border-radius: 10px;
         height: 100%;
     }
@@ -36,7 +36,7 @@
     }
 
     &__bottom {
-        border-top: solid 1px #ebebeb;
+        border-top: solid 1px var(--border-color);
         margin: 0 30px;
         padding: 20px 0;
         
