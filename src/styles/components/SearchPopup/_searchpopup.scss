@@ -1,14 +1,20 @@
+
 .search {
     &__content {
         position: absolute;
         top: 40%;
         left: 50%;
-        width: 650px;
+        width: 100%;
         -webkit-transform: translate(-50%,-50%);
         -moz-transform: translate(-50%,-50%);
         -ms-transform: translate(-50%,-50%);
         -o-transform: translate(-50%,-50%);
         transform: translate(-50%,-50%);
+    }
+    .btn-lg {
+        padding: 13px 20px;
+        font-size: 16px;
+        border-radius: 20px;
     }
     .form-control {
         display: block;
@@ -23,5 +29,18 @@
         border: solid 1px #ebebeb;
         -webkit-box-shadow: none;
         box-shadow: none;
+    }
+}
+
+@media screen and (min-width: 920px){
+    .search  {
+        &__content {
+            width: 650px;
+        } 
+        .btn-lg {
+            padding: 13px 40px;
+            font-size: 19px;
+            border-radius: 25px;
+        }
     }
 }

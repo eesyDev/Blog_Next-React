@@ -7,6 +7,9 @@ import Footer from '../components/Footer';
 import Head from "next/head";
 import PostItem from '../components/PostItem';
 import Breadcrumbs from '../components/Breadcrumbs';
+import Loading from '../components/Loading';
+import { setNotFound } from '@/redux/slices/notFoundSlice';
+import NotFound from '../404';
 
 
 function tagSlug() {
@@ -22,18 +25,27 @@ function tagSlug() {
     dispatch(fetchTagData(tagSlug));
   }, [dispatch, tagSlug]);
 
-  if (!tagData) {
-    // Render a loading state or error message
-    return <div>Loading...</div>;
+  useEffect(() => {
+    if (!tagData) {
+      dispatch(setNotFound(true))
+    }
+  }, [dispatch, tagData]);
+
+  // if (!tagData) {
+  //   return <NotFound/>;
+  // }
+
+  if (error) {
+    return <NotFound/>;
   }
 
 
-  const count = tagData ? tagData.tag_posts ? tagData.tag_posts.length : 0 : ''
+  const count = tagData ? tagData?.tag_posts ? tagData.tag_posts.length : 0 : ''
 
   const crumbs = [
     { name: 'Главная', path: '/' },
     { name: 'Теги', path: '/tags' },
-    { name: tagData.name, path: null },
+    { name: tagData?.name, path: null },
   ];
 
   function pluralize(count) {
@@ -64,21 +76,22 @@ function tagSlug() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main >
+        <Header/>
         <div className='tag-detail'>
-            <Header/>
+            
 			{
 				loading ? (
-					<div>Loading...</div>
+					<div><Loading/></div>
 					  ) : error ? (
 						<div>Error: {error.message}</div>
 					  ) : !tagData ? (
-						<div>No categories found</div>
+						<div>No tags found</div>
 					  ) : (
 					  <div className='tag-detail__content '>
 							<div className='container-xl'>
 								<div className='tag-detail__heading'>
 									<div className='left'>
-										<h1 className={'tag-detail__title ' + tagData.slug}>{tagData.name}</h1>
+										<h1 className={'tag-detail__title ' + tagData?.slug}>{tagData?.name}</h1>
 										<span className='count'>{count} &nbsp; <span className='dot'></span>{articlesNaming}</span>
 										<div className='decoration-count'>{count}</div>
 									</div>
@@ -97,7 +110,7 @@ function tagSlug() {
                     <div className='row'>
                         {
                             loading ? (
-                              <div>Loading...</div>
+                              <div><Loading/></div>
                                 ) : error ? (
                                   <div>Error: {error.message}</div>
                                 ) : !tagData ? (
@@ -119,6 +132,7 @@ function tagSlug() {
                                   subcategory={item.subcategory[0]?.name}
                                   category={item.category[0]?.title}
                                   categorySlug={item.category[0]?.slug}
+                                  subcategorySlug={item.subcategory[0]?.slug}
                                   title={item.title}
                                   tags={item.tags}
                                 />

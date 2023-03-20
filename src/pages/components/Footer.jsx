@@ -18,7 +18,7 @@ function Footer() {
         <div className='container-xl'>
             <div className='footer__inner'>
                 <div className='row d-flex align-items-center gy-4'>
-                    <div className='col-md-4'>
+                    <div className='col-md-4 footer__left'>
                         <span className='copyright'>
                             Designed and developed by <a href='https://eesydev.kz'>ESSYDEV</a>
                         </span>

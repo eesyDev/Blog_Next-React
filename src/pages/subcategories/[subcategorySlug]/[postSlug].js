@@ -6,6 +6,7 @@ import Header from "@/pages/components/Header"
 import Footer from "@/pages/components/Footer"
 import Breadcrumbs from '@/pages/components/Breadcrumbs';
 import Sidebar from '@/pages/components/Sidebar';
+import NotFound from '@/pages/404';
 
 function PostDetail() {
   const router = useRouter();
@@ -19,17 +20,25 @@ function PostDetail() {
     dispatch(fetchPostData(postSlug));
   }, [dispatch, postSlug]);
 
+  if (!loading && !postData) {
+    return <div>Error</div>
+  }
+
   if (loading) {
     return <div>Loading...</div>;
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return <NotFound/>;
   }
 
-  if (!postData) {
-    return <div>No post found</div>;
-  }
+  // useEffect(() => {
+  //   if (!loading && !postData) {
+  //     // Redirect to the custom 404 page
+  //     router.replace('/404');
+  //   }
+  // }, [postData]);
+
   const truncateString = (str, maxLength) => {
     if (str.length > maxLength) {
       return str.slice(0, maxLength) + '...';

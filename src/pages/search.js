@@ -22,48 +22,51 @@ function Search() {
       <Header />
         <main>
             <div className='search'>
-                <div className='search__heading'>
+                <div className='search__heading mb-5'>
                     <div className="container-xl">    
-                        <h1>Search Results for "{query}"</h1>
+                        <h1 className='search__title'>Search Results for "{query}"</h1>
                         <Breadcrumbs crumbs={crumbs}/>
                     </div>
                 </div>
-                <div className='search__wrapper'>
+                <div className='search__wrapper mb-5'>
                     <div className="container-xl">       
                         <div className="row">
                             <div className="col-lg-8">
-                            {results?.length > 0 ? (
-                                results.map((item) => (
-                                <div className="category-detail__post" key={item.id}>
-                                    <PostCategoryItem
-                                    class="col-sm-6"
-                                    links={
-                                        '/categories/' +
-                                        item.category[0]?.slug +
-                                        '/' +
-                                        item.slug
-                                    }
-                                    date={item.formatted_added_time}
-                                    content_1={item.content_1}
-                                    image_1={item.image_1}
-                                    content_2={item.content_2}
-                                    image_2={item.image_2}
-                                    content_3={item.content_3}
-                                    image_3={item.image_3}
-                                    slug={item.slug}
-                                    category={item.category[0]?.title}
-                                    categorySlug={item.category[0]?.slug}
-                                    title={item.title}
-                                    tags={item.tags}
-                                    />
-                                </div>
-                                ))
-                            ) : (
-                                <p>No results found for "{query}".</p>
-                            )}
+                                <div className='search__posts-wrapper'>
+                                    {results?.length > 0 ? (
+                                        results.map((item) => (
+                                        <div className="category-detail__post" key={item.id}>
+                                            <PostCategoryItem
+                                            class="col-sm-6"
+                                            links={
+                                                '/categories/' +
+                                                item.category[0]?.slug +
+                                                '/' +
+                                                item.slug
+                                            }
+                                            date={item.formatted_added_time}
+                                            content_1={item.content_1}
+                                            image_1={item.image_1}
+                                            content_2={item.content_2}
+                                            image_2={item.image_2}
+                                            content_3={item.content_3}
+                                            image_3={item.image_3}
+                                            slug={item.slug}
+                                            category={item.category[0]?.title}
+                                            categorySlug={item.category[0]?.slug}
+                                            title={item.title}
+                                            tags={item.tags}
+                                            />
+                                        </div>
+                                        ))
+                                    ) : (
+                                        <p>No results found for "{query}".</p>
+                                    )}
+                                    </div>
+                                    
                             </div>
                             <div className="col-lg-4">
-                            <Sidebar />
+                                <Sidebar />
                             </div>
                         </div>
                     </div>

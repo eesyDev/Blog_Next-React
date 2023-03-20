@@ -12,6 +12,8 @@ import allPostsReducer from './slices/allPostsSlice';
 import nasdaqReducer from './slices/nasdaqSlice';
 import themeReducer from './slices/themeSlice';
 import searchReducer from './slices/searchSlice';
+import notFoundReducer from './slices/notFoundSlice';
+
 import {
   persistStore,
   persistReducer,
@@ -57,6 +59,7 @@ export const store = configureStore({
     nasdaq: nasdaqReducer,
     mode: themeReducer, 
     search: persistedReducer,
+    notFound: notFoundReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

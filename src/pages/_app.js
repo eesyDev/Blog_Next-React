@@ -10,6 +10,7 @@ import styles from '../styles/_styles.scss';
 import queryString from 'query-string';
 import { useRouter } from 'next/router';
 import { PersistGate } from 'redux-persist/integration/react';
+import NotFound from './404';
 
 
 
@@ -28,7 +29,7 @@ export default function App({ Component, pageProps }) {
   )
 }
 
-const AppInner = ({ Component, pageProps, parsedQuery }) => {
+const AppInner = ({ Component, pageProps, parsedQuery, err }) => {
   const { mode } = useSelector((state) => state.mode);
 
   useEffect(() => {
@@ -37,6 +38,14 @@ const AppInner = ({ Component, pageProps, parsedQuery }) => {
   }, [mode]);
 
   return (
-    <Component {...pageProps} parsedQuery={parsedQuery} />
+    <>
+      {err && err.statusCode === 404 ? (
+        <NotFound/>
+      ): (
+        <Component {...pageProps} parsedQuery={parsedQuery} />
+      )
+      }
+    </>
+    
   )
 }

@@ -8,7 +8,9 @@ import Head from "next/head";
 import Breadcrumbs from '../components/BreadCrumbs';
 import Sidebar from '../components/Sidebar';
 import PostCategoryItem from '../components/PostCategoryItem';
-
+import Loading from '../components/Loading';
+import { setNotFound } from '@/redux/slices/notFoundSlice';
+import NotFound from '../404';
 
 
 function categoryId() {
@@ -21,22 +23,25 @@ function categoryId() {
     dispatch(fetchCategoryData(categorySlug));
   }, [dispatch, categorySlug]);
 
+  useEffect(() => {
+    if (!categoryData) {
+      dispatch(setNotFound(true));
+    }
+  }, [dispatch, categoryData]);
+  
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading/>;
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return <NotFound/>;
   }
 
-  if (!categoryData) {
-    return <div>No category found</div>;
-  }
 
   const crumbs = [
     { name: 'главная', path: '/' },
     { name: 'категории', path: '/categories' },
-    { name: categoryData.title, path: null },
+    { name: categoryData?.title, path: null },
   ];
   
   return (
@@ -56,7 +61,7 @@ function categoryId() {
             <div className='category-detail__content mt-5 mb-5'>
                 <div className='container-xl'>
                     <div className='category-detail__heading'>
-                        <h1 className='category-detail__title '>{categoryData.title}</h1>
+                        <h1 className='category-detail__title '>{categoryData?.title}</h1>
                         <Breadcrumbs crumbs={crumbs}/>
                     </div>
                 </div>
@@ -68,7 +73,7 @@ function categoryId() {
                         <div className='category-detail__posts-wrapper'>
                           <div className='row'>
                           {
-                            categoryData.category_posts && categoryData.category_posts.map((item) => (
+                            categoryData?.category_posts && categoryData?.category_posts.map((item) => (
                             <div className='category-detail__post' key={item.id}>
                               <PostCategoryItem 
                                   class='col-sm-6'

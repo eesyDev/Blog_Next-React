@@ -6,6 +6,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Link from 'next/link';
 import Sidebar from '../components/Sidebar';
+import Loading from '../components/Loading';
 
 function indexSubcategories() {
   const dispatch = useDispatch();
@@ -39,7 +40,7 @@ function indexSubcategories() {
         <div className='col-md-8 row'>
           {
 			loading ? (
-				<div>Loading...</div>
+				<div><Loading/></div>
 				  ) : error ? (
 					<div>Error: {error.message}</div>
 				  ) : !allCategoriesData ? (

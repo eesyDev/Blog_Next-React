@@ -11,6 +11,10 @@
 @import './components/CategoryIndexItem/_category_index_item';
 @import './components/PostDetail/_post_detail';
 @import './components/ModeToggle/_mode_toggle.css';
+@import './components/SearchPage/_search_page';
+@import './components/Burger/Burger.css';
+@import './components/Loading/_loading.css';
+
 
 $main: #4f70fe;
 $second:#ff0081;
@@ -27,6 +31,12 @@ body {
         
         background: #010616;
         color: #fff ;
+        .offcanvas-backdrop {
+            background-color: #6e6e6e;
+        }
+        .offcanvas {
+            background: #010616;
+        }
         .tags a {
             background: #020513;
             box-shadow: 0 2px 6px rgba(255, 255, 255, .26);
@@ -79,7 +89,19 @@ article {
     }
     b, strong {
         font-weight: 500;
+        a {
+            font-weight: 600;
+            text-decoration: underline;
+            font-size: 1.3em;
+        }
     }
+    a {
+        strong {
+            font-weight: 600;
+            font-size: 1.3em;
+            text-decoration: underline;
+        }
+    } 
 }
 a {
     color: inherit;
@@ -247,5 +269,15 @@ img, svg {
 @media (min-width: 1400px) {
     .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
         max-width: 1140px;
+    }
+}
+
+.not-found {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+        max-width: 100%;
+        width: 500px;
     }
 }

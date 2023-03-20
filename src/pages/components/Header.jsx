@@ -10,20 +10,14 @@ import BurgerMenu from "./BurgerMenu";
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import ModeToggle from "./ModeToggle";
-
+import Logo from "./Logo";
+import Loading from "./Loading";
 
 
 function Header() { 
-    const [bodyClass, setBodyClass] = useState('light');
     const dispatch = useDispatch();
-    const { allCategoriesData } = useSelector((state) => state.allCategories);
+    const { allCategoriesData, loading, error } = useSelector((state) => state.allCategories);
 
-    useEffect(() => {
-        document.body.addEventListener("click", () => {
-          setBodyClass(document.body.className);
-        });
-      }, []);
 
     useEffect(() => {
         dispatch(fetchAllCategoriesData());
@@ -35,12 +29,22 @@ function Header() {
             dispatch(fetchNasdaqData());
     }, [dispatch]);
 
+    // if (loading) {
+    //     return <Loading/>
+    //   }
+    
+      if (error) {
+        return <div>Error: {error.message}</div>;
+      }
+    
+    //   if (!allCategoriesData) {
+    //     return <div>No category found</div>;
+    //   }
+
 
   const nasdaqList = nasdaqData && Object.entries(nasdaqData).map(([key, value]) => {
     return { key, value };
   });
-
-//   console.log(nasdaqList)
 
     return (
         <header className="header">
@@ -78,27 +82,10 @@ function Header() {
                             </li>
                         </ul>
                     </div>
-                    {bodyClass === "light" ?
-                        <div className="col-md-4 col-sm-12 col-xs-12 header__middle">
-                            <Link href="/" className="logo" key="logo">
-                                <img src="/images/logopicNew.png" alt="dollars"/>
-                            </Link>
-                            <Link href="/" className="logo-text" key="logo-text">
-                                <img src="/images/logoNew.svg"/>
-                            </Link>
-                            <p className="motto d-block" key='motto'>C дипломом можно заработать на жизнь. Самообразование сделает Вам состояние. Джим Рон ©</p>
-                        </div> :
-                        <div className="col-md-4 col-sm-12 col-xs-12 header__middle">
-                            <Link href="/" className="logo" key="logo">
-                                <img src="/images/logopicNewWhite.png" alt="dollars"/>
-                            </Link>
-                            <Link href="/" className="logo-text" key="logo-text">
-                                <img src="/images/lofoNewWhite.svg"/>
-                            </Link>
-                            <p className="motto d-block" key='motto'>C дипломом можно заработать на жизнь. Самообразование сделает Вам состояние. Джим Рон ©</p>
-                        </div>
-                    }
-                    
+                    <div className="col-md-4 col-sm-12 col-xs-12 header__middle">
+                        <Logo/>  
+                    </div>
+                                      
                     <div className="col-md-4 col-sm-12 col-xs-12">
                         <div className="header__buttons">                            
                             <SearchPopup />
@@ -167,7 +154,6 @@ function Header() {
                 } */}
                 </div>
             </div>
-            <ModeToggle/>
         </header>
     )
 }

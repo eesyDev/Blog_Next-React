@@ -8,7 +8,9 @@ import Head from "next/head";
 import Breadcrumbs from '../components/BreadCrumbs';
 import Sidebar from '../components/Sidebar';
 import PostCategoryItem from '../components/PostCategoryItem';
-
+import Loading from '../components/Loading';
+import { setNotFound } from '@/redux/slices/notFoundSlice';
+import NotFound from '../404';
 
 
 function subcategoryId() {
@@ -16,6 +18,8 @@ function subcategoryId() {
   const { subcategorySlug } = router.query;
   const dispatch = useDispatch();
   const { subcategoryData, loading, error } = useSelector((state) => state.subcategory);
+  const notFound = useSelector((state) => state.notFound);
+
 
   useEffect(() => {
     if (subcategorySlug) {
@@ -23,22 +27,28 @@ function subcategoryId() {
     }
   }, [dispatch, subcategorySlug]);
 
+  useEffect(() => {
+    if (!loading && !subcategoryData) {
+      dispatch(setNotFound(true));
+    }
+  }, [dispatch, subcategoryData]);
+
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading/>;
   }
 
+  // if (notFound) {
+  //   return <NotFound/>;
+  // }
+  
   if (error) {
-    return <div>Error: {error.message}</div>;
-  }
-
-  if (!subcategoryData) {
-    return <div>No category found</div>;
+    return <NotFound/>;
   }
 
   const crumbs = [
     { name: 'главная', path: '/' },
     { name: 'категории', path: '/subcategories' },
-    { name: subcategoryData.name, path: null },
+    { name: subcategoryData?.name, path: null },
   ];
 
   return (
@@ -59,7 +69,7 @@ function subcategoryId() {
                 <div className='container'>
                     <div className='category-detail__heading'>
                         <Breadcrumbs crumbs={crumbs}/>
-                        <h1 className='category-detail__title '>{subcategoryData.name}</h1>
+                        <h1 className='category-detail__title '>{subcategoryData?.name}</h1>
                         
                     </div>
                 </div>
@@ -71,7 +81,7 @@ function subcategoryId() {
                         <div className='category-detail__posts-wrapper'>
                           <div className='row'>
                           {
-                            subcategoryData.sub_posts && subcategoryData.sub_posts.map((item) => (
+                            subcategoryData?.sub_posts && subcategoryData?.sub_posts.map((item) => (
                             <div className='col-md-12 col-sm-6 category-detail__post' key={item.id}>
                               <PostCategoryItem 
                                   class='col-sm-6'

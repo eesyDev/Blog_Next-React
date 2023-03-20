@@ -7,6 +7,7 @@ import Header from '@/pages/components/Header';
 import Footer from '@/pages/components/Footer';
 import Breadcrumbs from '@/pages/components/Breadcrumbs';
 import Sidebar from '@/pages/components/Sidebar';
+import Loading from '@/pages/components/Loading';
 
 function PostDetail() {
   const router = useRouter();
@@ -19,8 +20,14 @@ function PostDetail() {
     dispatch(fetchPostData(postSlug));
   }, [dispatch, postSlug]);
 
+  useEffect(() => {
+    if (!postData) {
+      dispatch(setNotFound(true));
+    }
+  }, [dispatch, postData]);
+
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading/>;
   }
 
   if (error) {
