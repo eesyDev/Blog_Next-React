@@ -1,0 +1,68 @@
+.offcanvas-title {
+    margin: 0 auto;
+}
+.burger {
+    .logo {
+        width: 80px;
+        height: 80px;
+        display: flex;
+        margin: 0 auto;
+    }
+    &__heading {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+    }
+    &-menu {
+        &__heading {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+    }
+    .menu {
+        padding-left: 20px;
+        list-style-type: none;
+        ul {
+            list-style-type: none;
+        }
+        li {
+            > span {
+                display: flex;
+                align-items: center;
+            }
+            .menu-toggle {
+                margin-left: 20px;
+            }
+        }
+    }
+    .submenu {
+        max-height: 0;
+        padding-left: 20px;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+      }
+      
+      .submenu.show {
+        max-height: 200px; /* set this to a value larger than the maximum height of your submenu */
+        transition: max-height 0.4s ease-in-out;
+      }
+    .toggle-wrapper {
+        position: relative;
+        top: unset;
+        left: unset;
+        right: unset;
+    }
+    .choose-mode {
+        display: flex;
+        margin-bottom: 30px;
+        h4 {
+            margin-right: 20px;
+        }
+    }
+    .motto {
+        display: none !important;
+    }
+}
